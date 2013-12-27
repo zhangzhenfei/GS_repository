@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.glacier.permission.dao.FieldMapper" >
+  <resultMap id="BaseResultMap" type="com.glacier.permission.entity.Field" >
+    <id column="temp_field_field_id" property="fieldId" jdbcType="VARCHAR" />
+    <result column="temp_field_field" property="field" jdbcType="VARCHAR" />
+    <result column="temp_field_field_name" property="fieldName" jdbcType="VARCHAR" />
+    <result column="temp_field_value_field" property="valueField" jdbcType="VARCHAR" />
+    <result column="temp_field_display_field" property="displayField" jdbcType="VARCHAR" />
+    <result column="temp_field_enabled" property="enabled" jdbcType="TINYINT" />
+    <result column="temp_field_sort" property="sort" jdbcType="INTEGER" />
+    <result column="temp_field_remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    temp_field.field_id as temp_field_field_id, temp_field.field as temp_field_field, 
+    temp_field.field_name as temp_field_field_name, temp_field.value_field as temp_field_value_field, 
+    temp_field.display_field as temp_field_display_field, temp_field.enabled as temp_field_enabled, 
+    temp_field.sort as temp_field_sort, temp_field.remark as temp_field_remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.glacier.permission.entity.FieldExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_field temp_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit ${limitStart} , ${limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_field temp_field
+    where temp_field.field_id = #{fieldId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_field
+    where field_id = #{fieldId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.glacier.permission.entity.FieldExample" >
+    delete from t_field temp_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.glacier.permission.entity.Field" >
+    insert into t_field (field_id, field, field_name, 
+      value_field, display_field, enabled, 
+      sort, remark)
+    values (#{fieldId,jdbcType=VARCHAR}, #{field,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{valueField,jdbcType=VARCHAR}, #{displayField,jdbcType=VARCHAR}, #{enabled,jdbcType=TINYINT}, 
+      #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.glacier.permission.entity.Field" >
+    insert into t_field
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fieldId != null" >
+        field_id,
+      </if>
+      <if test="field != null" >
+        field,
+      </if>
+      <if test="fieldName != null" >
+        field_name,
+      </if>
+      <if test="valueField != null" >
+        value_field,
+      </if>
+      <if test="displayField != null" >
+        display_field,
+      </if>
+      <if test="enabled != null" >
+        enabled,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fieldId != null" >
+        #{fieldId,jdbcType=VARCHAR},
+      </if>
+      <if test="field != null" >
+        #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="valueField != null" >
+        #{valueField,jdbcType=VARCHAR},
+      </if>
+      <if test="displayField != null" >
+        #{displayField,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.glacier.permission.entity.FieldExample" resultType="java.lang.Integer" >
+    select count(*) from t_field temp_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_field temp_field
+    <set >
+      <if test="record.fieldId != null" >
+        temp_field.field_id = #{record.fieldId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field != null" >
+        temp_field.field = #{record.field,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldName != null" >
+        temp_field.field_name = #{record.fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valueField != null" >
+        temp_field.value_field = #{record.valueField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayField != null" >
+        temp_field.display_field = #{record.displayField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enabled != null" >
+        temp_field.enabled = #{record.enabled,jdbcType=TINYINT},
+      </if>
+      <if test="record.sort != null" >
+        temp_field.sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        temp_field.remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_field temp_field
+    set temp_field.field_id = #{record.fieldId,jdbcType=VARCHAR},
+      temp_field.field = #{record.field,jdbcType=VARCHAR},
+      temp_field.field_name = #{record.fieldName,jdbcType=VARCHAR},
+      temp_field.value_field = #{record.valueField,jdbcType=VARCHAR},
+      temp_field.display_field = #{record.displayField,jdbcType=VARCHAR},
+      temp_field.enabled = #{record.enabled,jdbcType=TINYINT},
+      temp_field.sort = #{record.sort,jdbcType=INTEGER},
+      temp_field.remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.glacier.permission.entity.Field" >
+    update t_field
+    <set >
+      <if test="field != null" >
+        field = #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null" >
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="valueField != null" >
+        value_field = #{valueField,jdbcType=VARCHAR},
+      </if>
+      <if test="displayField != null" >
+        display_field = #{displayField,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        enabled = #{enabled,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where field_id = #{fieldId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.glacier.permission.entity.Field" >
+    update t_field
+    set field = #{field,jdbcType=VARCHAR},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      value_field = #{valueField,jdbcType=VARCHAR},
+      display_field = #{displayField,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=TINYINT},
+      sort = #{sort,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where field_id = #{fieldId,jdbcType=VARCHAR}
+  </update>
+</mapper>
