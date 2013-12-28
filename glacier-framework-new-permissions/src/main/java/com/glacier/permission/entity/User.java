@@ -1,11 +1,15 @@
 package com.glacier.permission.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.glacier.permission.entity.util.UserBuiltin;
 import com.glacier.permission.entity.util.UserStatus;
 
-public class User {
+public class User implements Serializable{
+    
+    private static final long serialVersionUID = 1495793485789342L;
+
     private String userId;
 
     private String username;
