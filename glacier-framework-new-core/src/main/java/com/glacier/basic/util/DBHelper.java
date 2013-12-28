@@ -20,7 +20,7 @@ public final class DBHelper {
 
         try {
             //通过读取配置文件获取jdbc连接参数
-            ClassPathResource classPathResource = new ClassPathResource("spring/jdbcTest.properties");
+            ClassPathResource classPathResource = new ClassPathResource("spring/config.properties");
 
             Properties p = new Properties();
             p.load(classPathResource.getInputStream());
@@ -39,8 +39,6 @@ public final class DBHelper {
             }
 
         } catch (ClassNotFoundException e) {
-
-            System.out.println("Sorry,can't find the Driver!");
 
             e.printStackTrace();
 
