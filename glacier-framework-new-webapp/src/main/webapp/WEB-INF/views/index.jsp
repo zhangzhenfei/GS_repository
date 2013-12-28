@@ -7,209 +7,134 @@
 		<!-- 引入公用的js和样式库 -->
 		<jsp:include page="inc.jsp"/>
 		<script type="text/javascript" charset="utf-8">
-			$(function() {
+			$(function(){
+				
+				var userInfoDetailStr = '<table class="formtable" style="font-weight: bold;">'+
+											'<tr><td>本次登录时间：</td><td><span class="label label-info">2013-12-06/15:27:23</span></td></tr>'+
+											'<tr><td>本次登录IP：</td><td><span class="label label-success">192.168.1.1[本地/本机]</span></td></tr>'+
+											'<tr><td>上次登录时间：</td><td><span class="label label-info">2013-12-16/15:58:12</span></td></tr>'+
+											'<tr><td>上次登录IP：</td><td><span class="label label-danger">202.96.156.23[上海电信]<span></td></tr>'+
+										'</table>';
+				
+				$('.user').tooltip({
+				    content: userInfoDetailStr,
+				    showDelay:50
+				});
+				
 				//初始化导航
 				$('#layout_west_tree').tree({
 					url : ctx +'/do/res/menu/getPrincipalUserMenu.json',
 					smooth: true,       //该属性用以启用当前 easyui-tree 控件对平滑数据格式的支持
 					lines : true,
 					onClick : function(node) {
-						var url;
-						if (node.attributes.url) {//获取树节点中自定义属性的url属性
-							url = ctx + node.attributes.url;
-							layout_center_addTabFun({//调用glacier.util.js中的动态增加tab方法
-								title : node.text,
-								closable : true,
-								iconCls : node.iconCls,
-								href : url
-							});
+						var url = ctx + node.attributes.url;
+						if (url) {//获取树节点中自定义属性的url属性
+							$("#layout_center_panel").panel("setTitle",node.text);
+							$('#layout_center_panel').panel('refresh',url);
 						}
 					}
 				});
-				//初始化tab菜单
-				$('#layout_center_tabsMenu').menu({
-					onClick : function(item) {
-						var curTabTitle = $(this).data('tabTitle');
-						var type = $(item.target).attr('type');
-	
-						if (type === 'refresh') {
-							layout_center_refreshTab(curTabTitle);
-							return;
+				
+				//全屏切换
+				$("#btnFullScreen").click(function (){
+		            if ($.util.supportsFullScreen) {
+		                if ($.util.isFullScreen()) {
+		                    $.util.cancelFullScreen();
+		                } else {
+		                    $.util.requestFullScreen();
+		                }
+		            } else {
+		                $.easyui.messager.show("当前浏览器不支持全屏 API，请更换至最新的 Chrome/Firefox/Safari 浏览器或通过 F11 快捷键进行操作。");
+		            }
+		        });
+				
+				//用户注销
+				$("#logout").click(function (){
+					$.messager.confirm('请确认', '安全退出系统？', function(r){
+						if (r){
+							window.location.href = ctx + '/do/login.htm';
 						}
-	
-						if (type === 'close') {
-							var t = $('#layout_center_tabs').tabs('getTab', curTabTitle);
-							if (t.panel('options').closable) {
-								$('#layout_center_tabs').tabs('close', curTabTitle);
-							}
-							return;
-						}
-	
-						var allTabs = $('#layout_center_tabs').tabs('tabs');
-						var closeTabsTitle = [];
-	
-						$.each(allTabs, function() {
-							var opt = $(this).panel('options');
-							if (opt.closable && opt.title != curTabTitle && type === 'closeOther') {
-								closeTabsTitle.push(opt.title);
-							} else if (opt.closable && type === 'closeAll') {
-								closeTabsTitle.push(opt.title);
-							}
-						});
-	
-						for ( var i = 0; i < closeTabsTitle.length; i++) {
-							$('#layout_center_tabs').tabs('close', closeTabsTitle[i]);
-						}
-					}
+					});
 				});
-				//初始化tab
-				$('#layout_center_tabs').tabs({
-					fit : true,
-					border : false,
-					onContextMenu : function(e, title) {
-						e.preventDefault();
-						$('#layout_center_tabsMenu').menu('show', {
-							left : e.pageX,
-							top : e.pageY
-						}).data('tabTitle', title);
-					},
-					tools : [ {
-						iconCls : 'icon-reload',
-						border : false,
-						handler : function() {
-							var href = $('#layout_center_tabs').tabs('getSelected').panel('options').href;
-							if (href) {/*说明tab是以href方式引入的目标页面*/
-								var index = $('#layout_center_tabs').tabs('getTabIndex', $('#layout_center_tabs').tabs('getSelected'));
-								$('#layout_center_tabs').tabs('getTab', index).panel('refresh');
-							} else {/*说明tab是以content方式引入的目标页面*/
-								var panel = $('#layout_center_tabs').tabs('getSelected').panel('panel');
-								var frame = panel.find('iframe');
-								try {
-									if (frame.length > 0) {
-										for ( var i = 0; i < frame.length; i++) {
-											frame[i].contentWindow.document.write('');
-											frame[i].contentWindow.close();
-											frame[i].src = frame[i].src;
-										}
-										if ($.browser.msie) {
-											CollectGarbage();
-										}
-									}
-								} catch (e) {
-								}
-							}
-						}
-					}, {
-						iconCls : 'icon-cancel',
-						handler : function() {
-							var index = $('#layout_center_tabs').tabs('getTabIndex', $('#layout_center_tabs').tabs('getSelected'));
-							var tab = $('#layout_center_tabs').tabs('getTab', index);
-							if (tab.panel('options').closable) {
-								$('#layout_center_tabs').tabs('close', index);
-							} else {
-								$.messager.alert('提示', '[' + tab.panel('options').title + ']不可以被关闭', 'error');
-							}
-						}
-					} ]
+				
+				//主页
+				$("#home").click(function (){
+					$("#layout_center_panel").panel("setTitle",'主页');
+					//$('#layout_center_panel').panel('refresh',url);
 				});
+				
+				editCurrentUserPwd = function(){
+					alert("修改密码");
+				};
+				
+				checkAuth = function(){
+					alert("查看权限");
+				};
+				
 			});
 			
-			//刷新tab面板方法
-			function layout_center_refreshTab(title) {
-				$('#layout_center_tabs').tabs('getTab', title).panel('refresh');
-			};
-			//动态增加tab
-			function layout_center_addTabFun(opts) {
-				var t = $('#layout_center_tabs');
-				if (t.tabs('exists', opts.title)) {
-					t.tabs('select', opts.title);
-				} else {
-					t.tabs('add', opts);
-				}
-			};
-			//用户退出系统方法
-			function logoutFun(){
-				window.location.href = ctx + '/do/login.htm';
-			};
-			//查看当前用户权限方法
-			function currentUserResource(){
-			};
 		</script>
 	</head>
-	<body class="easyui-layout" data-options="fit:true,border:false">
-		<div data-options="region:'north',border:false" style="height:60px;overflow:hidden;">
-			<div style="position: absolute; right: 0px; bottom: 0px;">
-				<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'cog'">更换皮肤</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'cog'">控制面板</a> <a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_zxMenu',iconCls:'cog'">注销</a>
+	<body>
+		<div id="index_layout" class="easyui-layout" data-options="fit:true,border:false">
+			<div data-options="region:'north',border:false" class="logo">
+				<div id="sessionInfoDiv" style="position: absolute; right: 0px; top: 0px;" class="login_name">
+					<span class="icon-dortmund-user" style="vertical-align: top;display:inline-block;width:16px;height:16px;"></span>
+					<a href="javascript:void(0);" class="user" rel="shareit">超级管理员</a>
+					<span>欢迎你！您使用本地IP登录！</span>
+				</div>
+				<div style="position: absolute; right: 0px; bottom: 0px;">
+					<a id="home" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-dortmund-home'">主页</a> 
+					<a id="btnFullScreen" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-dortmund-limited-edition'">全屏切换</a> 
+					<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_pfMenu',iconCls:'icon-dortmund-delicious'">更换皮肤</a> 
+					<a href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#layout_north_kzmbMenu',iconCls:'icon-dortmund-settings'">控制面板</a> 
+					<a id="logout" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-dortmund-logout'">注销</a>
+				</div>
+				<div id="layout_north_pfMenu" style="width:120px; display: none;">
+					<div onclick="changeThemeFun('metro-gray');" title="metro-gray" data-options="iconCls:'icon_custom_gray'">metro-gray</div>
+					<div onclick="changeThemeFun('metro-blue');" title="metro-blue" data-options="iconCls:'icon_custom_acquiesce'">metro-blue</div>
+					<div onclick="changeThemeFun('metro-green');" title="metro-green" data-options="iconCls:'icon_custom_green'">metro-green</div>
+					<div onclick="changeThemeFun('metro-orange');" title="metro-orange" data-options="iconCls:'icon_custom_buff'">metro-orange</div>
+					<div onclick="changeThemeFun('metro-red');" title="metro-red" data-options="iconCls:'icon_custom_pink'">metro-red</div>
+				</div>
+				<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
+					<div onclick="editCurrentUserPwd();" data-options="iconCls:'icon-dortmund-drawings'">修改密码</div>
+					<div class="menu-sep"></div>	
+					<div onclick="checkAuth();" data-options="iconCls:'icon-dortmund-customers'">查看权限</div>
+				</div>
 			</div>
-			<div id="layout_north_pfMenu" style="width: 120px; display: none;">
-				<div onclick="changeThemeFun('default');" title="default">default</div>
-				<div onclick="changeThemeFun('gray');" title="gray">gray</div>
-				<div onclick="changeThemeFun('metro');" title="metro">metro</div>
-				<div onclick="changeThemeFun('bootstrap');" title="bootstrap">bootstrap</div>
-				<div onclick="changeThemeFun('black');" title="black">black</div>
-				<div onclick="changeThemeFun('cupertino');" title="cupertino">cupertino</div>
-				<div onclick="changeThemeFun('dark-hive');" title="dark-hive">dark-hive</div>
-				<div onclick="changeThemeFun('pepper-grinder');" title="pepper-grinder">pepper-grinder</div>
-				<div onclick="changeThemeFun('sunny');" title="sunny">sunny</div>
-				<div onclick="changeThemeFun('metro-blue');" title="metro-blue">metro-blue</div>
-				<div onclick="changeThemeFun('metro-gray');" title="metro-gray">metro-gray</div>
-				<div onclick="changeThemeFun('metro-green');" title="metro-green">metro-green</div>
-				<div onclick="changeThemeFun('metro-orange');" title="metro-orange">metro-orange</div>
-				<div onclick="changeThemeFun('metro-red');" title="metro-red">metro-red</div>
-			</div>
-			<div id="layout_north_kzmbMenu" style="width: 100px; display: none;">
-				<div onclick="editCurrentUserPwd();">修改密码</div>
-				<div class="menu-sep"></div>
-				<div onclick="currentUserRole();">我的角色</div>
-				<div class="menu-sep"></div>
-				<div onclick="currentUserResource();">我的权限</div>
-			</div>
-			<div id="layout_north_zxMenu" style="width: 100px; display: none;">
-				<div onclick="logoutFun();">退出系统</div>
-			</div>
-		</div>
-		<div data-options="region:'west',split:true" style="width:160px;overflow:hidden;">
-			<div class="easyui-accordion" data-options="fit:true,border:false">
-				<div title="导航" data-options="iconCls:'anchor',tools : [{
-							iconCls : 'database_refresh',
-							handler : function() {
-								$('#layout_west_tree').tree('reload');
-							}
-						}, {
-							iconCls : 'resultset_next',
-							handler : function() {
-								var node = $('#layout_west_tree').tree('getSelected');
-								if (node) {
-									$('#layout_west_tree').tree('expandAll', node.target);
-								} else {
-									$('#layout_west_tree').tree('expandAll');
+			<div data-options="region:'west',split:true" style="width:160px;overflow:hidden;">
+				<div class="easyui-panel" title="导航" data-options="fit:true,border:false,iconCls:'anchor',tools : [{
+								iconCls : 'database_refresh',
+								handler : function() {
+									$('#layout_west_tree').tree('reload');
 								}
-							}
-						}, {
-							iconCls : 'resultset_previous',
-							handler : function() {
-								var node = $('#layout_west_tree').tree('getSelected');
-								if (node) {
-									$('#layout_west_tree').tree('collapseAll', node.target);
-								} else {
-									$('#layout_west_tree').tree('collapseAll');
+							}, {
+								iconCls : 'resultset_next',
+								handler : function() {
+									var node = $('#layout_west_tree').tree('getSelected');
+									if (node) {
+										$('#layout_west_tree').tree('expandAll', node.target);
+									} else {
+										$('#layout_west_tree').tree('expandAll');
+									}
 								}
-							}
-						}]">
+							}, {
+								iconCls : 'resultset_previous',
+								handler : function() {
+									var node = $('#layout_west_tree').tree('getSelected');
+									if (node) {
+										$('#layout_west_tree').tree('collapseAll', node.target);
+									} else {
+										$('#layout_west_tree').tree('collapseAll');
+									}
+								}
+							}]">
 					<ul id="layout_west_tree"></ul>
 				</div>
 			</div>
-		</div>
-		<div data-options="region:'center'" style="overflow: hidden;">
-			<div id="layout_center_tabs" style="overflow: hidden;">
-				<div title="首页"></div>
-			</div>
-			<div id="layout_center_tabsMenu" style="width: 120px;display:none;">
-				<div type="refresh" data-options="iconCls:'icon-reload'">刷新</div>
-				<div class="menu-sep"></div>
-				<div type="close" data-options="iconCls:'icon-cancel'">关闭</div>
-				<div type="closeOther" data-options="iconCls:'icon-cancel'">关闭其他</div>
-				<div type="closeAll" data-options="iconCls:'icon-cancel'">关闭所有</div>
+			<div data-options="region:'center'">
+				<div id="layout_center_panel" class="easyui-panel" title="主页" data-options="fit:true,border:false" style="padding:5px;overflow: hidden;"></div>
 			</div>
 		</div>
 	</body>

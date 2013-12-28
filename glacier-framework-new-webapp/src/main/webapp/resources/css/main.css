@@ -46,45 +46,49 @@ hr {
 
 /*logo样式*/
 .logo {
+	height: 65px;
+	overflow: hidden;
 	background: url('../images/logo.png') no-repeat;
+}
+
+/*登录用户超链接*/
+.user {
+	color: #5D4381;
+	padding:0px 5px;
+	text-decoration:none;
+}
+.user: hover {
+	text-decoration: none;
 }
 
 /*登录信息高亮*/
 .login_name {
-	background-color: #D9EDF7;
+	background-color: #D9D9D9;
 	border-color: #BCE8F1;
-	color: #4D4D4D;
-	border-radius: 3px;
 	font-weight: bold;
-	line-height: 14px;
-	padding: 8px 35px 8px 14px;
+	line-height: 16px;
+	padding: 10px;
 }
 
 /*主题样式*/
 .icon_custom_acquiesce {
 	background: url('../images/icons/acquiesce.png') no-repeat center center;
 }
-
 .icon_custom_blue {
 	background: url('../images/icons/blue.png') no-repeat center center;
 }
-
 .icon_custom_buff {
 	background: url('../images/icons/buff.png') no-repeat center center;
 }
-
 .icon_custom_gray {
 	background: url('../images/icons/gray.png') no-repeat center center;
 }
-
 .icon_custom_green {
 	background: url('../images/icons/green.png') no-repeat center center;
 }
-
 .icon_custom_pink {
 	background: url('../images/icons/pink.png') no-repeat center center;
 }
-
 .icon_custom_wathet {
 	background: url('../images/icons/wathet.png') no-repeat center center;
 }
@@ -130,19 +134,46 @@ td.forminputtable {
 /*toorbar 右对齐*/
 .toorbar_right {
 	float: right;
-	margin:3px 3px;
+	margin: 3px 3px;
 	overflow: hidden;
 }
 
 /*提示*/
 .tip_info {
-    background: none repeat scroll 0 0 #FFFEE6;
-    color: #8F5700;
-    padding:8px;
+	background: none repeat scroll 0 0 #FFFEE6;
+	color: #8F5700;
+	padding: 8px;
 }
 .tip_text {
-    float: left;
-    height: 16px;
-    margin-right: 8px;
-    width: 16px;
+	float: left;
+	height: 16px;
+	margin-right: 8px;
+	width: 16px;
+}
+
+.label-warning {
+    background-color: #F0AD4E;
+}
+.label-danger {
+    background-color: #D9534F;
+}
+.label-primary {
+    background-color: #428BCA;
+}
+.label-success {
+    background-color: #5CB85C;
+}
+.label-info {
+    background-color: #5BC0DE;
+}
+.label {
+    border-radius: 0.25em;
+    color: #FFFFFF;
+    display: inline;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0.2em 0.6em 0.3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
 }

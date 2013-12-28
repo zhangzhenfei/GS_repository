@@ -11,12 +11,12 @@
 <!-- 引入网站标识icon -->
 <link rel="shortcut icon" href="${ctx}/resources/images/favicon/favicon.ico"></link>
 <link rel="icon" href="${ctx }/resources/images/favicon/favicon.ico"></link>
+
 <!-- 引入easyui样式以及扩展样式 -->
 <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${ctx}/resources/js/jquery-extensions-master/jquery-easyui-theme/<c:out value="${cookie.easyuiThemeName.value}" default="metro-blue"/>/easyui.css"  />
 <link href="${ctx}/resources/js/jquery-extensions-master/jquery-easyui-theme/icon.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/js/jquery-extensions-master/icons/icon-all.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/js/jquery-extensions-master/jeasyui-extensions/jquery-easyui-portal/portal.css" rel="stylesheet" type="text/css" />
-
 <!-- 引入自定义样式 -->
 <link href="${ctx}/resources/css/main.css" rel="stylesheet" type="text/css" />
 
@@ -54,4 +54,5 @@
 
 <!-- 引入自定义js-->
 <script src="${ctx}/resources/js/common/glacier.util.js" type="text/javascript"></script>
+
 

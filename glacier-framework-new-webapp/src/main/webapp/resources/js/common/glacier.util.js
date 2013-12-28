@@ -18,17 +18,6 @@ Array.prototype.contains = function(obj) {
  * @param themeName 主题的名称，和theme中文件夹名称对应
  */
 function changeThemeFun(themeName) {
-	if ($.cookie('easyuiThemeName')) {
-		$('#layout_north_pfMenu').menu('setIcon', {
-			target : $('#layout_north_pfMenu div[title=' + $.cookie('easyuiThemeName') + ']')[0],
-			iconCls : 'emptyIcon'
-		});
-	}
-	$('#layout_north_pfMenu').menu('setIcon', {
-		target : $('#layout_north_pfMenu div[title=' + themeName + ']')[0],
-		iconCls : 'tick'
-	});
-
 	//定义了一个link的id为easyuiTheme，支持主题更换
 	var $easyuiTheme = $('#easyuiTheme');
 	var url = $easyuiTheme.attr('href');
@@ -50,7 +39,6 @@ function changeThemeFun(themeName) {
 			}
 		}
 	}
-
 	$.cookie('easyuiThemeName', themeName, {
 		expires : 7
 	});
