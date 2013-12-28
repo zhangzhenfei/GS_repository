@@ -1,4 +1,4 @@
 glacier-framework-new-all
 =========================
 
-Localhost
+基于Shiro权限框架
