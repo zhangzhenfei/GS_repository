@@ -2,48 +2,54 @@
 <%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
 <%@ page import="org.apache.shiro.authc.LockedAccountException "%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 获取项目根path -->
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE HTML>
+
+<!DOCTYPE html>
 <html>
+	<head>
+		<title>冰川进销存管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- 引入网站标识icon -->
+		<link rel="shortcut icon" href="${ctx}/resources/images/favicon/favicon.ico"></link>
+		<link rel="icon" href="${ctx}/resources/images/favicon/favicon.ico"></link>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="${ctx}/resources/js/bootstrap-3.0.3-dist/dist/css/bootstrap.min.css">
+	</head>
 	<body>
-	<form id="loginForm" action="${ctx}/do/login.htm" method="post">
-			<%
-				String error = (String) request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
-				if(error != null){
-			%>
-					<div class="alert alert-error controls input-large">
-						<button class="close" data-dismiss="alert">×</button>
-			<%
-					if(error.contains("DisabledAccountException")){
-						out.print("用户已被屏蔽,请登录其他用户.");
-					}
-					else{
-						out.print("登录失败，请重试.");
-					}
-			%>		
+		<div class="container" style="width:1376px !important;padding-top:150px;">
+			<div class="row">
+			  <div class="col-md-5">
+			  	<div>
+			  		<img src="${ctx}/resources/images/login.jpg" class="img-responsive" alt="Responsive image">
+			  	</div>
+			  </div>
+			  <div class="col-md-7">
+			  	<div class="page-header">
+				  <h1>GS Invoicing Management System<small>冰川进销存管理软件</small></h1>
+				</div>
+			  	<div class="row">
+			  		<div class="col-md-7">
+				  		<form id="loginForm" role="form" action="${ctx}/do/login.htm" method="post">
+						  <div class="form-group">
+						    <label for="username" class="sr-only">用户名</label>
+						    <input type="text" id="username" name="username" class="form-control input-lg"  placeholder="您的用户名" value="${username}">
+						  </div>
+						  <div class="form-group">
+						    <label for="password" class="sr-only">密码</label>
+						    <input type="password" id="password" name="password" class="form-control input-lg"  placeholder="您的密码">
+						  </div>
+						  <div class="form-group">
+						  	<div class="row">
+						  		<div class="col-md-3"><button type="submit" class="btn btn-primary btn-block">登录</button></div>
+						  		<div class="col-md-3"><button type="reset" class="btn btn-success btn-block">重置</button></div>
+						  	</div>
+	  					  </div>
+						</form>
 					</div>
-			<%
-				}
-			%>
-			<div class="control-group">
-				<label for="username" class="control-label">名称:</label>
-				<div class="controls">
-					<input type="text" id="username" name="username" value="${username}" class="input-medium required"/>
 				</div>
+			  </div>
 			</div>
-			<div class="control-group">
-				<label for="password" class="control-label">密码:</label>
-				<div class="controls">
-					<input type="password" id="password" name="password" class="input-medium required"/>
-				</div>
-			</div>
-			<div class="control-group">
-				<div class="controls">
-					<label class="checkbox inline" for="rememberMe"> <input type="checkbox" id="rememberMe" name="rememberMe"/> 记住我</label>
-					<input id="submit_btn" class="btn" type="submit" value="登录"/>
-					<p class="help-block">(管理员：<b>admin/admin</b>, 普通用户：<b>user/admin</b>)</p>
-				</div>
-			</div>
-		</form>
+		</div>
 	</body>
 </html>
