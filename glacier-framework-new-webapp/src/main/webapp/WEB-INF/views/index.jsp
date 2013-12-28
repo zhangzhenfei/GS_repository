@@ -10,10 +10,10 @@
 			$(function(){
 				
 				var userInfoDetailStr = '<table class="formtable" style="font-weight: bold;">'+
-											'<tr><td>本次登录时间：</td><td><span class="label label-info">2013-12-06/15:27:23</span></td></tr>'+
+											'<tr><td>本次登录时间：</td><td><span class="label label-success">2013-12-06/15:27:23</span></td></tr>'+
 											'<tr><td>本次登录IP：</td><td><span class="label label-success">192.168.1.1[本地/本机]</span></td></tr>'+
-											'<tr><td>上次登录时间：</td><td><span class="label label-info">2013-12-16/15:58:12</span></td></tr>'+
-											'<tr><td>上次登录IP：</td><td><span class="label label-danger">202.96.156.23[上海电信]<span></td></tr>'+
+											'<tr><td>上次登录时间：</td><td><span class="label label-warning">2013-12-16/15:58:12</span></td></tr>'+
+											'<tr><td>上次登录IP：</td><td><span class="label label-warning">202.96.156.23[上海电信]<span></td></tr>'+
 										'</table>';
 				
 				$('.user').tooltip({
@@ -81,7 +81,7 @@
 				<div id="sessionInfoDiv" style="position: absolute; right: 0px; top: 0px;" class="login_name">
 					<span class="icon-dortmund-user" style="vertical-align: top;display:inline-block;width:16px;height:16px;"></span>
 					<a href="javascript:void(0);" class="user" rel="shareit">超级管理员</a>
-					<span>欢迎你！您使用本地IP登录！</span>
+					<span class="label label-info">2013年12月28日 星期六</span>
 				</div>
 				<div style="position: absolute; right: 0px; bottom: 0px;">
 					<a id="home" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-dortmund-home'">主页</a> 

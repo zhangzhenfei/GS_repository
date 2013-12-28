@@ -64,9 +64,9 @@ hr {
 /*登录信息高亮*/
 .login_name {
 	background-color: #D9D9D9;
-	border-color: #BCE8F1;
+	border-color: #D9D9D9;
 	font-weight: bold;
-	line-height: 16px;
+	line-height: 14px;
 	padding: 10px;
 }
 
