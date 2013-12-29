@@ -22,6 +22,11 @@ public class CaptchaUsernamePasswordToken extends UsernamePasswordToken {
 
     public CaptchaUsernamePasswordToken(String username, char[] password, boolean rememberMe, String host, String captcha) {
         super(username, password, rememberMe, host);
+        System.out.println(username);
+        System.out.println(password);
+        System.out.println(rememberMe);
+        System.out.println(host);
+        System.out.println(captcha);
         this.captcha = captcha;
     }
 }
