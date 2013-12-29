@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.glacier.basic.test.SpringTransactionalTestCase;
 import com.glacier.permission.entity.User;
-import com.glacier.security.util.ShiroTestUtils;
+import com.glacier.test.util.ShiroTestUtils;
 
 /**
  * @ClassName: MenuServiceTest

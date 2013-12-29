@@ -3,7 +3,8 @@
  * @author zhenfei.zhang 
  * Copyright (c) 2012 Glacier SoftWare Company Limited. All Rights Reserved.
  */
-package com.glacier.security.util;
+
+package com.glacier.test.util;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.support.SubjectThreadState;
