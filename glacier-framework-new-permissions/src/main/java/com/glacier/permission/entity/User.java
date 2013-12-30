@@ -6,9 +6,10 @@ import java.util.Date;
 import com.glacier.permission.entity.util.UserBuiltin;
 import com.glacier.permission.entity.util.UserStatus;
 
-@SuppressWarnings("serial")
-public class User implements Serializable{
-    
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -153663806132372652L;
+
     private String userId;
 
     private String username;
@@ -42,10 +43,9 @@ public class User implements Serializable{
     private Date createTime;
 
     private String depId;
-    
+
     public User() {
     }
-
 
     public User(String userId, String username, String password) {
         this.userId = userId;
@@ -84,7 +84,6 @@ public class User implements Serializable{
     public void setSalt(String salt) {
         this.salt = salt;
     }
-
 
     public UserStatus getStatus() {
         return status;
@@ -179,19 +178,19 @@ public class User implements Serializable{
         }
         User other = (User) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getBuiltin() == null ? other.getBuiltin() == null : this.getBuiltin().equals(other.getBuiltin()))
-            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-            && (this.getUserImage() == null ? other.getUserImage() == null : this.getUserImage().equals(other.getUserImage()))
-            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
-            && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()))
-            && (this.getLastLoginIpAddress() == null ? other.getLastLoginIpAddress() == null : this.getLastLoginIpAddress().equals(other.getLastLoginIpAddress()))
-            && (this.getCreater() == null ? other.getCreater() == null : this.getCreater().equals(other.getCreater()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getDepId() == null ? other.getDepId() == null : this.getDepId().equals(other.getDepId()));
+                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+                && (this.getSalt() == null ? other.getSalt() == null : this.getSalt().equals(other.getSalt()))
+                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+                && (this.getBuiltin() == null ? other.getBuiltin() == null : this.getBuiltin().equals(other.getBuiltin()))
+                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
+                && (this.getUserImage() == null ? other.getUserImage() == null : this.getUserImage().equals(other.getUserImage()))
+                && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
+                && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()))
+                && (this.getLastLoginIpAddress() == null ? other.getLastLoginIpAddress() == null : this.getLastLoginIpAddress().equals(other.getLastLoginIpAddress()))
+                && (this.getCreater() == null ? other.getCreater() == null : this.getCreater().equals(other.getCreater()))
+                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+                && (this.getDepId() == null ? other.getDepId() == null : this.getDepId().equals(other.getDepId()));
     }
 
     @Override

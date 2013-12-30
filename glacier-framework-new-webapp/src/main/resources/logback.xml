@@ -37,8 +37,6 @@
 	<!-- 以下为本系统定制 -->
 	<logger name="com.glacier" level="TRACE" />
     
-
-
 	<root level="INFO">
 		<appender-ref ref="stdout" />
 		<appender-ref ref="logfile" />

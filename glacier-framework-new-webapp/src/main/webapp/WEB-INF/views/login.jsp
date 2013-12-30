@@ -6,10 +6,11 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title>冰川进销存管理系统</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<!-- 引入网站标识icon -->
 		<link rel="shortcut icon" href="${ctx}/resources/images/favicon/favicon.ico"></link>
 		<link rel="icon" href="${ctx}/resources/images/favicon/favicon.ico"></link>
@@ -34,7 +35,7 @@
 					</nav>
 				</div>
 				<div class="col-md-6 hidden-sm hidden-xs">
-					<div> <img src="${ctx}/resources/images/login.jpg" class="img-responsive" alt="Glacier Soft" /> </div>
+					<img src="${ctx}/resources/images/login.jpg" class="img-responsive" alt="Glacier Soft" />
 				</div>
 				<div class="col-md-6 col-xs-12">
 					<div class="page-header">
@@ -58,7 +59,7 @@
 								<div class="form-group">
 									<label for="rememberMe" class="control-label col-xs-3 hidden-sm hidden-xs">记住我</label>
 										<div class="col-md-9 col-xs-12">
-										<input id="rememberMe" name="rememberMe" type="checkbox" checked data-on="primary" data-off="danger"  data-on-label="开启" data-off-label="关闭">
+										<input id="rememberMe" name="rememberMe" type="checkbox" data-on="primary" data-off="danger"  data-on-label="开启" data-off-label="关闭"/>
 									</div>
 								</div>
 								<div id="captcha_form_group" class="form-group">
@@ -69,7 +70,7 @@
 													<img class="img-responsive" style="width:110px;height:32px;" id="login_kaptcha" src="${ctx}/resources/images/kaptcha.jpg" alt="刷新验证码"  />
 												</a>
 											</span>
-											<input type="text" id="captcha" name="captcha" maxlength="4" value="" class="form-control input-lg">
+											<input type="text" id="captcha" name="captcha" maxlength="4" class="form-control input-lg">
 										</div>
 									</div>
 									<div class="col-md-3 col-xs-3">
@@ -120,6 +121,7 @@
 						$captcha.focus();
 						return false;
 					}
+					$('#login_submit').attr('disabled', 'disabled');
 					return true;
 				};
 			});

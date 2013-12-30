@@ -8,6 +8,7 @@ package com.glacier.permissions.service;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -38,6 +39,11 @@ public class ActionServiceTest extends SpringTransactionalTestCase {
     @After
     public void tearDown() {// 注销
         ShiroTestUtils.clearSubject();
+    }
+    
+    @Test
+    public void test(){
+        actionService.getPAAuthByCondition("sdf", "sdf");
     }
 
 }

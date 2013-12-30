@@ -104,7 +104,7 @@
 			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 			<property name="locations">
 				<list>
-					<value>classpath:spring/jdbcTest.properties</value>
+					<value>classpath:spring/config.properties</value>
 				</list>
 			</property>
 			<property name="fileEncoding" value="UTF-8" />

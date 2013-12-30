@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  */
 @ActiveProfiles("test")
 public abstract class SpringTransactionalTestCase extends AbstractTransactionalJUnit4SpringContextTests {
-    
+
     public Long timeStamp;
 
 }

@@ -3,7 +3,7 @@
  * @author zhenfei.zhang 
  * Copyright (c) 2012 Glacier SoftWare Company Limited. All Rights Reserved.
  */
-package com.glacier.rems.dao;
+package com.glacier.permissions.dao;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,12 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.glacier.basic.test.SpringTransactionalTestCase;
-import com.glacier.basic.util.RandomGUID;
-import com.glacier.permission.dao.UserMapper;
-import com.glacier.permission.entity.User;
-import com.glacier.permission.entity.UserExample;
-import com.glacier.permission.entity.util.UserBuiltin;
-import com.glacier.permission.entity.util.UserStatus;
+import com.glacier.permission.dao.MenuMapper;
 
 /**
  * @ClassName: UserMybatisDaoTest
@@ -29,7 +24,10 @@ import com.glacier.permission.entity.util.UserStatus;
  */
 @DirtiesContext
 @ContextConfiguration(locations = { "classpath*:spring/applicationContext-common.xml" })
-public class UserMybatisDaoTest extends SpringTransactionalTestCase {
+public class MenuMybatisDaoTest extends SpringTransactionalTestCase {
+    
+    @Autowired
+    private MenuMapper menuMapper;
     
     @Before
     public void before() {
@@ -41,23 +39,9 @@ public class UserMybatisDaoTest extends SpringTransactionalTestCase {
         System.out.println("\r\r执行耗时 : " + (System.currentTimeMillis() - timeStamp) / 1000f + " 秒 ");
     }
 
-    @Autowired
-    private UserMapper userMapper;
-
     @Test
-    public void getAll() {
-        userMapper.selectByExample(new UserExample());
+    public void selectByUserId() {
+        menuMapper.selectByUserId("07f211657c8c6b31ee4360c88917e5d2");
     }
     
-    @Test
-    public void add() {
-        User user  = new User();
-        user.setUsername("admintest");
-        user.setPassword(user.getUsername());
-        user.setBuiltin(UserBuiltin.builtin);
-        user.setUserId(RandomGUID.getRandomGUID());
-        user.setStatus(UserStatus.enable);
-        userMapper.insert(user);
-    }
-
 }
