@@ -19,20 +19,16 @@
 		<link rel="stylesheet" href="${ctx}/resources/js/bootstrap-switch/bootstrap-switch.min.css"></link>
 	</head>
 	<body>
-		<div class="container" style="padding-top:150px;">
-			<div class="row">
-				<div class="col-xs-12">
+		<div class="container">
+			<div id="normal_container" class="row">
+				<div class="col-md-12">
 					<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 						<div class="navbar-header">
-						    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						      <span class="sr-only">Toggle navigation</span>
-						      <span class="icon-bar"></span>
-						      <span class="icon-bar"></span>
-						      <span class="icon-bar"></span>
-						    </button>
-						    <a class="navbar-brand" href="#">Brand</a>
+						    <a class="navbar-brand" href="#">GlacierSoft</a>
 					  </div>
 					</nav>
+				</div>
+				<div class="col-md-12 hidden-sm hidden-xs" style="height: 120px;">
 				</div>
 				<div class="col-md-6 hidden-sm hidden-xs">
 					<img src="${ctx}/resources/images/login.jpg" class="img-responsive" alt="Glacier Soft" />
@@ -83,8 +79,25 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="abnormal" style="display:none;">
+			<h1>经研究表面，IE8版本以下的IE浏览器属于反人类浏览器，为了保证您的体验，推荐使用谷歌。。</h1>
+		</div>
 		<script src="${ctx}/resources/js/jquery-extensions-master/jquery/jquery-1.10.2.js" type="text/javascript"></script> 
 		<script src="${ctx}/resources/js/bootstrap-switch/bootstrap-switch.min.js" type="text/javascript"></script> 
+		<!-- Just for debugging purposes. Don't actually copy this line! -->
+	    <!--[if lt IE 9]>
+	    	<script type="text/javascript">
+	    		$("#normal_container").hide();
+	    		$("#abnormal").show();
+	    	</script>
+	    <![endif]-->
+	
+	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	    <!--[if lt IE 9]>
+	      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+	      <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+	    <![endif]-->
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#rememberMe').bootstrapSwitch();//开关风格checkbox
