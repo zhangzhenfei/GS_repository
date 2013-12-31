@@ -40,7 +40,7 @@
 					<img src="${pageContext.request.contextPath}/resources/images/login.jpg" class="img-responsive" alt="Glacier Soft" />
 				</div>
 				<div class="col-md-6 col-xs-12">
-					<div class="col-lg-12 visible-lg" style="height: 120px;">
+					<div class="col-lg-12 visible-lg" style="height:120px;">
 					</div>
 					<div class="page-header">
 						<h1>GS Invoicing Management System <small>冰川进销存管理软件</small></h1>
