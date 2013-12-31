@@ -104,13 +104,13 @@
 				</div>
 			</div>
 			<div data-options="region:'west',split:true" style="width:160px;overflow:hidden;">
-				<div class="easyui-panel" title="导航" data-options="fit:true,border:false,iconCls:'anchor',tools : [{
-								iconCls : 'database_refresh',
+				<div class="easyui-panel" title="导航" data-options="fit:true,border:false,iconCls:'icon-dortmund-world',tools : [{
+								iconCls : 'icon-dortmund-communication',
 								handler : function() {
 									$('#layout_west_tree').tree('reload');
 								}
 							}, {
-								iconCls : 'resultset_next',
+								iconCls : 'icon-dortmund-upcoming-work',
 								handler : function() {
 									var node = $('#layout_west_tree').tree('getSelected');
 									if (node) {
@@ -120,7 +120,7 @@
 									}
 								}
 							}, {
-								iconCls : 'resultset_previous',
+								iconCls : 'icon-dortmund-sign-up',
 								handler : function() {
 									var node = $('#layout_west_tree').tree('getSelected');
 									if (node) {

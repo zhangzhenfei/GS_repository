@@ -130,8 +130,11 @@
 							url: ctx + url,
 							success: function(r){
 								$.messager.show(r.msg);
-								glacier.permissions_mgr.role_mgr.role.roleDataGrid.datagrid('reload');
-							    dia.dialog("close");  
+								if(r.success){
+									glacier.permissions_mgr.role_mgr.role.roleDataGrid.datagrid('reload');
+								    dia.dialog("close"); 
+								}
+								 
 							}
 						});
 					}

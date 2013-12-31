@@ -1,5 +1,6 @@
 package com.glacier.permissions.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -116,6 +117,9 @@ public class RoleService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @MethodLog(opera = "新增角色")
     public Object addRole(Role role) {
+        Subject pricipalSubject = SecurityUtils.getSubject();
+        User pricipalUser = (User) pricipalSubject.getPrincipal();
+        
         JqReturnJson returnResult = new JqReturnJson();// 构建返回结果，默认结果为false
         RoleExample roleExample = new RoleExample();
         int count = 0;
@@ -135,6 +139,8 @@ public class RoleService {
             return returnResult;
         }
         role.setRoleId(RandomGUID.getRandomGUID());
+        role.setCreater(pricipalUser.getUserId());
+        role.setCreateTime(new Date());
         count = roleMapper.insert(role);
         if (count == 1) {
             returnResult.setSuccess(true);
@@ -176,7 +182,7 @@ public class RoleService {
             returnResult.setMsg("英文名称重复，请重新填写!");
             return returnResult;
         }
-        count = roleMapper.updateByPrimaryKey(role);
+        count = roleMapper.updateByPrimaryKeySelective(role);
         if (count == 1) {
             returnResult.setSuccess(true);
             returnResult.setMsg("[" + role.getRoleCnName() + "] 角色信息已保存");

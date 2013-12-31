@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td>备注：</td>
-			<td><textarea id="role_mgr_role_form_remark" name="remark" style="width:268px;" maxlength="255" class="spinner formta" value="${roleData.remark}"></textarea></td>
+			<td><textarea id="role_mgr_role_form_remark" name="remark" style="width:268px;" maxlength="255" class="spinner formta">${roleData.remark}</textarea></td>
 		</tr>
 	</table>
 </form>
