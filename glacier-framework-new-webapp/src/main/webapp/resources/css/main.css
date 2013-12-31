@@ -1,6 +1,6 @@
 /*全局样式*/
-body {
-	font-family: Microsoft YaHei,verdana, arial, tahoma, helvetica, sans-serif;
+body, h1, h2, h3, h4, h5, h6,input,textarea{
+	font-family: verdana, arial, tahoma, helvetica, sans-serif;
 	font-size: 12px;
 	margin: 0;
 	padding: 0;
@@ -8,8 +8,6 @@ body {
 
 /*input,span文字居中*/
 input,textarea {
-	font-family: verdana, arial, tahoma, helvetica, sans-serif;
-	font-size: 12px;
 	vertical-align: middle;
 }
 
