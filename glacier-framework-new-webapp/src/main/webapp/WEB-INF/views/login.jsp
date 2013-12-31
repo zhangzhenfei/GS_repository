@@ -190,16 +190,19 @@
 				 	if(error.contains("DisabledAccountException")){
 		 	    %>
 				 	  	$('#danger_alert h4').html('用户已被屏蔽，请登录其他用户！');
+				 	  	$('#username_form_group').addClass("has-error");
 				 	  	$('#username').focus();
 				 	   <%
 					}else if(error.contains("IncorrectCaptchaException")){
 					    %>
 				 	  	$('#danger_alert h4').html('验证码错误，请重新输入！');
+				 	  	$('#captcha_form_group').addClass("has-error");
 				 	  	$('#captcha').focus();
 				 	   <%
 					}else{
 					    %>
 					    $('#danger_alert h4').html('用户名或密码错误，请重新输入！');
+					    $('#password_form_group').addClass("has-error");
 					    $('#password').focus();
 				 	   <%
 					}
