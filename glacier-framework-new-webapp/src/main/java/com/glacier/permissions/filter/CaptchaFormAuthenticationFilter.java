@@ -61,7 +61,7 @@ public class CaptchaFormAuthenticationFilter extends FormAuthenticationFilter {
     // 验证码校验
     protected void doCaptchaValidate(HttpServletRequest request, CaptchaUsernamePasswordToken token) {
         String captcha = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
-        if (captcha != null && !captcha.equalsIgnoreCase(token.getCaptcha())) {
+        if (StringUtils.isBlank(captcha) || !captcha.equalsIgnoreCase(token.getCaptcha())) {
             throw new IncorrectCaptchaException("验证码错误！");
         }
     }
